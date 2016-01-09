@@ -13,7 +13,7 @@ Get-WindowsFeature |
 ? { $_.InstallState -eq 'Available' } | 
 Uninstall-WindowsFeature -Remove
 
-Install-WindowsUpdate -AcceptEula
+#Install-WindowsUpdate -AcceptEula
 if(Test-PendingReboot){ Invoke-Reboot }
 
 Write-BoxstarterMessage "Cleaning SxS..."
@@ -60,3 +60,5 @@ Enable-PSRemoting -Force -SkipNetworkProfileCheck
 winrm set winrm/config/client/auth '@{Basic="true"}'
 winrm set winrm/config/service/auth '@{Basic="true"}'
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+
+Disable-UAC
