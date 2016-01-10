@@ -58,7 +58,7 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "windows_2012_r2_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_2012_r2.template"
+      "vagrantfile_template": "./templates/win/vagrantfile-windows_2012_r2.template"
     }
   ],
   "variables": {
