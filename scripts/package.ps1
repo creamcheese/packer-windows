@@ -10,7 +10,7 @@ Update-ExecutionPolicy -Policy Unrestricted
 Write-BoxstarterMessage "Removing unused features..."
 Remove-WindowsFeature -Name 'Powershell-ISE'
 Get-WindowsFeature | 
-? { $_.InstallState -eq 'Available' } | 
+? { ( $_.InstallState -eq 'Available' ) -and (( $_.Name -ne 'DNS' ) -and ( $_.Name -ne 'AD-Domain-Services' )) } | 
 Uninstall-WindowsFeature -Remove
 
 #Install-WindowsUpdate -AcceptEula
@@ -47,7 +47,7 @@ wget http://download.sysinternals.com/files/SDelete.zip -OutFile sdelete.zip
 mkdir C:\Windows\Panther\Unattend
 copy-item a:\postunattend.xml C:\Windows\Panther\Unattend\unattend.xml
 
-Write-BoxstarterMessage "Recreate [agefile after sysprep"
+Write-BoxstarterMessage "Recreate Pagefile after sysprep"
 $System = GWMI Win32_ComputerSystem -EnableAllPrivileges
 $System.AutomaticManagedPagefile = $true
 $System.Put()
